@@ -169,6 +169,7 @@ function dedupeHooks (hooks) {
   return res
 }
 
+// 标记生命周期
 LIFECYCLE_HOOKS.forEach(hook => {
   strats[hook] = mergeHook
 })
@@ -416,7 +417,6 @@ export function mergeOptions (
       }
     }
   }
-
   const options = {}
   let key
   for (key in parent) {
@@ -427,6 +427,8 @@ export function mergeOptions (
       mergeField(key)
     }
   }
+
+  // strats[key]通过mergeHook合并hooks
   function mergeField (key) {
     const strat = strats[key] || defaultStrat
     options[key] = strat(parent[key], child[key], vm, key)

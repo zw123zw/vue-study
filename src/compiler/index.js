@@ -13,6 +13,7 @@ export const createCompiler = createCompilerCreator(function baseCompile (
   template: string,
   options: CompilerOptions
 ): CompiledResult {
+
   const ast = parse(template.trim(), options)  // 模板解析阶段-解析器，将一堆模板字符串用正则等方式解析成抽象语法树AST
   if (options.optimize !== false) {
     optimize(ast, options)  //模板优化阶段-优化器，遍历AST，找出其中的静态节点，并打上标记

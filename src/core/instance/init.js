@@ -15,6 +15,7 @@ let uid = 0
 export function initMixin (Vue: Class<Component>) {
   Vue.prototype._init = function (options?: Object) {
     const vm: Component = this
+    debugger
     // a uid
     vm._uid = uid++
 
@@ -42,6 +43,7 @@ export function initMixin (Vue: Class<Component>) {
         vm
       )
     }
+
     /* istanbul ignore else */
     if (process.env.NODE_ENV !== 'production') {
       initProxy(vm)
@@ -50,14 +52,14 @@ export function initMixin (Vue: Class<Component>) {
     }
     // expose real self
     vm._self = vm
-    initLifecycle(vm)
-    initEvents(vm)
-    initRender(vm)
-    callHook(vm, 'beforeCreate')
+    initLifecycle(vm) // 初始化生命周期
+    initEvents(vm)  // 初始化事件
+    initRender(vm) // 初始化渲染函数
+    callHook(vm, 'beforeCreate') // 生命周期---创建前
     initInjections(vm) // resolve injections before data/props，先处理inject
     initState(vm)  //用户可以使用inject所注入的内容
     initProvide(vm) // resolve provide after data/props，再处理provide
-    callHook(vm, 'created')
+    callHook(vm, 'created')  // 生命周期---创建后
 
     /* istanbul ignore if */
     if (process.env.NODE_ENV !== 'production' && config.performance && mark) {

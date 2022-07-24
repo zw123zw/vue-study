@@ -19,6 +19,8 @@ Vue.prototype.$mount = function (
   el?: string | Element,
   hydrating?: boolean
 ): Component {
+  debugger
+
   el = el && query(el)
 
   /* istanbul ignore if */
@@ -62,6 +64,7 @@ Vue.prototype.$mount = function (
         mark('compile')
       }
 
+      // 模板编译
       const { render, staticRenderFns } = compileToFunctions(template, {
         outputSourceRange: process.env.NODE_ENV !== 'production',
         shouldDecodeNewlines,

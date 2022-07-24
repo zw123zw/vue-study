@@ -1,5 +1,6 @@
 /* @flow */
 
+import { log } from 'console'
 import {
   tip,
   toArray,
@@ -10,6 +11,7 @@ import {
 import { updateListeners } from '../vdom/helpers/index'
 
 export function initEvents (vm: Component) {
+
   vm._events = Object.create(null)
   vm._hasHookEvent = false
   // init parent attached events

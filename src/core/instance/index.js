@@ -4,6 +4,7 @@ import { renderMixin } from './render'
 import { eventsMixin } from './events'
 import { lifecycleMixin } from './lifecycle'
 import { warn } from '../util/index'
+import { log } from 'console'
 
 function Vue (options) {
   if (process.env.NODE_ENV !== 'production' &&

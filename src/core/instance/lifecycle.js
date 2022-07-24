@@ -17,6 +17,7 @@ import {
   validateProp,
   invokeWithErrorHandling
 } from '../util/index'
+import { log } from 'console'
 
 export let activeInstance: any = null
 export let isUpdatingChildComponent: boolean = false

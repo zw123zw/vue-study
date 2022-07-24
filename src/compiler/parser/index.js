@@ -201,6 +201,7 @@ export function parse (
     }
   }
 
+  // 模板解析核心代码，正则匹配解析标签时触发不同钩子函数
   parseHTML(template, {
     warn,
     expectHTML: options.expectHTML,

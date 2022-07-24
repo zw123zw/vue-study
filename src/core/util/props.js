@@ -17,7 +17,6 @@ type PropOptions = {
   required: ?boolean,
   validator: ?Function
 };
-
 export function validateProp (
   key: string,
   propOptions: Object,

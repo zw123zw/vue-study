@@ -174,6 +174,7 @@ const computedWatcherOptions = { lazy: true };
 // 根据Watcher的dirty来判断是不是需要重新计算，当dirty为true时需要重新计算，计算属性的Watcher和组件的Watcher都会得到通知，执行render函数重新渲染，也会重新读取计算属性的值，此时计算属性的dirty为true，则需要重新计算
 // 计算属性有缓存，数据未变化时读取缓存，计算属性函数不会反复执行
 function initComputed(vm: Component, computed: Object) {
+
   // $flow-disable-line
   const watchers = (vm._computedWatchers = Object.create(null));
   // computed properties are just getters during SSR
