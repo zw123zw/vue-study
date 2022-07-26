@@ -158,6 +158,7 @@ export function observe(value: any, asRootData: ? boolean): Observer | void {
 /**
  * Define a reactive property on an Object.
  */
+// 将数据转化为响应式
 export function defineReactive(
 	obj: Object,
 	key: string,

@@ -46,20 +46,21 @@ export function proxy(target: Object, sourceKey: string, key: string) {
   Object.defineProperty(target, key, sharedPropertyDefinition);
 }
 
+// 对不同选项的初始化流程进行特定顺序设计，这样在不同的选项中可以访问到已经初始化的数据了
 export function initState(vm: Component) {
   //Vue.js的所有组件都是vue.js的实例，模板编译中解析到组件节点，会将子组件实例化，并且将解析到的props当作参数传给子组件
   vm._watchers = [];
   const opts = vm.$options;
   if (opts.props) initProps(vm, opts.props); // 子组件被实例化时，首先对props处理，然后在初始化data时就可以使用props中数据了
-  if (opts.methods) initMethods(vm, opts.methods);
+  if (opts.methods) initMethods(vm, opts.methods); // 然后methods处理，methods中可以访问props
   if (opts.data) {
-    initData(vm);
+    initData(vm); // 子组件被实例化时，处理data时就可以访问props和methods数据，并且使observe转化为响应式
   } else {
     observe((vm._data = {}), true /* asRootData */);
   }
-  if (opts.computed) initComputed(vm, opts.computed);
+  if (opts.computed) initComputed(vm, opts.computed);  // 再对Computed处理，那么Computed中就可以访问data数据了
   if (opts.watch && opts.watch !== nativeWatch) {
-    initWatch(vm, opts.watch);
+    initWatch(vm, opts.watch);  //最后对watch处理，watch中就可以访问到以前所有初始化完成的数据
   }
 }
 

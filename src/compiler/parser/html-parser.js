@@ -73,7 +73,6 @@ export function parseHTML(html, options) {
       if (textEnd === 0) {
         // Comment:
         // 是否是注释节点
-        debugger;
         if (comment.test(html)) {
           const commentEnd = html.indexOf("-->");
 
@@ -126,9 +125,10 @@ export function parseHTML(html, options) {
         }
 
         // Start tag:
-        // 匹配结束标签
+        // 匹配开始标签
         const startTagMatch = parseStartTag();
         if (startTagMatch) {
+          // 处理开始标签
           handleStartTag(startTagMatch);
           if (shouldIgnoreFirstNewline(startTagMatch.tagName, html)) {
             advance(1);
@@ -219,7 +219,6 @@ export function parseHTML(html, options) {
   }
 
   function parseStartTag() {
-    debugger;
     const start = html.match(startTagOpen);
     if (start) {
       const match = {
@@ -227,8 +226,11 @@ export function parseHTML(html, options) {
         attrs: [],
         start: index,
       };
+      // 解析开始标签，指针后移
       advance(start[0].length);
       let end, attr;
+
+      // 循环解析属性
       while (
         !(end = html.match(startTagClose)) &&
         (attr = html.match(dynamicArgAttribute) || html.match(attribute))
@@ -238,6 +240,8 @@ export function parseHTML(html, options) {
         attr.end = index;
         match.attrs.push(attr);
       }
+
+      // 解析闭合标签
       if (end) {
         match.unarySlash = end[1];
         advance(end[0].length);

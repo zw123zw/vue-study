@@ -11,6 +11,8 @@ const isSpecialTag = makeMap('script,style,template', true)
 /**
  * Parse a single-file component (*.vue) file into an SFC Descriptor Object.
  */
+
+// 解析vue文件,通过vue-loader将文件内容转化为SFCDescriptor类型的数据格式
 export function parseComponent (
   content: string,
   options?: Object = {}
