@@ -334,6 +334,8 @@ export function stateMixin(Vue: Class<Component>) {
   // flow somehow has problems with directly declared definition object
   // when using Object.defineProperty, so we have to procedurally build up
   // the object here.
+
+  // 数据代理，将$data的访问代理到_data
   const dataDef = {};
   dataDef.get = function () {
     return this._data;
@@ -366,6 +368,7 @@ export function stateMixin(Vue: Class<Component>) {
     options?: Object
   ): Function {
     const vm: Component = this;
+    // 如果cb是个对象，那么用户传入的是回调函数cb和参数选项options的集合
     if (isPlainObject(cb)) {
       return createWatcher(vm, expOrFn, cb, options);
     }

@@ -246,6 +246,7 @@ export function set(target: Array < any > | Object, key: any, val: any): any {
 		target.splice(key, 1, val)
 		return val
 	}
+	//如果存在属性key，那么就不是新增，只是修改属性值，不需要进行后续操作	
 	if (key in target && !(key in Object.prototype)) {
 		target[key] = val
 		return val
@@ -290,6 +291,7 @@ export function del(target: Array < any > | Object, key: any) {
 		)
 		return
 	}
+	// 如果key在target中不存在，则直接返回
 	if (!hasOwn(target, key)) {
 		return
 	}
