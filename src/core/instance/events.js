@@ -61,6 +61,7 @@ export function eventsMixin (Vue: Class<Component>) {
         vm.$on(event[i], fn)
       }
     } else {
+      // 可以添加多个订阅者
       (vm._events[event] || (vm._events[event] = [])).push(fn)
       // optimize hook:event cost by using a boolean flag marked at registration
       // instead of a hash lookup
@@ -134,6 +135,7 @@ export function eventsMixin (Vue: Class<Component>) {
     }
     let cbs = vm._events[event]
     if (cbs) {
+      // 当发布时，通知每一个订阅者
       cbs = cbs.length > 1 ? toArray(cbs) : cbs
       const args = toArray(arguments, 1)
       const info = `event handler for "${event}"`
